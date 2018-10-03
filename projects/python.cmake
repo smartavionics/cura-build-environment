@@ -77,21 +77,15 @@ if(NOT BUILD_OS_WINDOWS)
         DEPENDEES upgrade_packages
     )
 
-    set(scipy_build_command ${PYTHON_EXECUTABLE} setup.py build)
-    set(scipy_install_command ${PYTHON_EXECUTABLE} setup.py install)
-    if(BUILD_OS_OSX)
-        set(scipy_build_command env LDFLAGS="-undefined dynamic_lookup" ${scipy_build_command})
-        set(scipy_install_command env LDFLAGS="-undefined dynamic_lookup" ${scipy_install_command})
+    # Scipy
+    if(BUILD_OS_LINUX)
+        set(scipy_url http://software.ultimaker.com/cura-binary-dependencies/scipy-1.1.0-cp35-cp35m-manylinux1_x86_64.whl)
+    else()
+        set(scipy_url http://software.ultimaker.com/cura-binary-dependencies/scipy-1.1.0-cp35-cp35m-macosx_10_6_intel.macosx_10_9_intel.macosx_10_9_x86_64.macosx_10_10_intel.macosx_10_10_x86_64.whl)
     endif()
 
-    # Scipy
     ExternalProject_Add_Step(Python add_scipy
-        URL https://github.com/scipy/scipy/releases/download/v1.1.0/scipy-1.1.0.tar.gz
-        URL_MD5 aa6bcc85276b6f25e17bcfc4dede8718
-        CONFIGURE_COMMAND ""
-        BUILD_COMMAND ${scipy_build_command}
-        INSTALL_COMMAND ${scipy_install_command}
-BUILD_IN_SOURCE 1
+        COMMAND ${PYTHON_EXECUTABLE} -m pip install ${scipy_url}
         DEPENDEES add_numpy
     )
 
