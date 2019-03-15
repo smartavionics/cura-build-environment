@@ -46,9 +46,9 @@ ExternalProject_Add(Python
 
 # Only build geos on Linux
 if(BUILD_OS_LINUX)
-    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos xz)
+    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos xz sqlite3)
 elseif(BUILD_OS_OSX)
-    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos OpenSSL xz)
+    SetProjectDependencies(TARGET Python DEPENDS OpenBLAS Geos OpenSSL xz sqlite3)
 else()
     SetProjectDependencies(TARGET Python DEPENDS OpenBLAS)
 endif()
@@ -63,6 +63,7 @@ ExternalProject_Add_Step(Python upgrade_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pip==18.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install setuptools==40.6.3
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest==4.1.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-benchmark==3.2.2
     COMMAND ${PYTHON_EXECUTABLE} -m pip install pytest-cov==2.6.1
     COMMAND ${PYTHON_EXECUTABLE} -m pip install mypy==0.660
     DEPENDEES ensurepip
@@ -148,6 +149,7 @@ ExternalProject_Add_Step(Python add_other_python_packages
     COMMAND ${PYTHON_EXECUTABLE} -m pip install trimesh==2.36.9
     COMMAND ${PYTHON_EXECUTABLE} -m pip install typing==3.6.6
     COMMAND ${PYTHON_EXECUTABLE} -m pip install urllib3==1.24.1
+    COMMAND ${PYTHON_EXECUTABLE} -m pip install PyYAML==3.13
     COMMAND ${PYTHON_EXECUTABLE} -m pip install zeroconf==0.17.6
     DEPENDEES add_numpy_scipy_shapely
 )
