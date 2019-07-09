@@ -11,7 +11,11 @@ if(BUILD_OS_OSX)
         BUILD_IN_SOURCE 1
     )
 elseif(BUILD_OS_LINUX)
-    set(_openssl_os linux-x86_64 enable-ec_nistp_64_gcc_128)
+    if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
+        set(_openssl_os linux-armv4)
+    else()
+        set(_openssl_os linux-x86_64 enable-ec_nistp_64_gcc_128)
+    endif()
     set(_openssl_args no-ssl2 no-ssl3 no-zlib shared enable-cms)
 
     ExternalProject_Add(OpenSSL
