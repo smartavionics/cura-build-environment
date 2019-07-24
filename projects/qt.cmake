@@ -43,6 +43,7 @@ set(qt_options
     -skip qt3d
     -skip qtcanvas3d
     -skip qtserialport
+    -skip qtserialbus
     -skip qtwayland
     -skip qtgamepad
     -skip qtscxml
