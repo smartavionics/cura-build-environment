@@ -58,6 +58,7 @@ elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
     list(APPEND qt_options
+     -use-gold-linker
 	 -rpath
 	 -pkg-config
 	 -opengl desktop -no-gtk
