@@ -59,17 +59,22 @@ elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
     list(APPEND qt_options
-     -use-gold-linker
+         -use-gold-linker
 	 -rpath
 	 -pkg-config
 	 -opengl desktop -no-gtk
 	 -qt-xcb
+         -no-linuxfb
 	 -fontconfig
 	 -system-freetype
 	 -system-zlib
 	 -ssl -openssl-runtime
 	 -I "${CMAKE_INSTALL_PREFIX}/include"
 	 -L "${CMAKE_INSTALL_PREFIX}/lib")
+endif()
+
+if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm.*")
+    list(APPEND qt_options -platform linux-g++-armv8)
 endif()
 
 if(BUILD_OS_OSX)
@@ -84,7 +89,8 @@ else()
     ExternalProject_Add(Qt
         URL ${qt_url}
         URL_MD5 ${qt_md5}
-        CONFIGURE_COMMAND ./configure ${qt_options}
+        CONFIGURE_COMMAND cp -uav ${CMAKE_SOURCE_DIR}/projects/linux-g++-armv8 qtbase/mkspecs
+        COMMAND ./configure ${qt_options}
         BUILD_IN_SOURCE 1
     )
 endif()
