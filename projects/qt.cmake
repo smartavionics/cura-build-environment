@@ -59,12 +59,12 @@ elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
     list(APPEND qt_options
-         -use-gold-linker
+     -use-gold-linker
 	 -rpath
 	 -pkg-config
 	 -opengl desktop -no-gtk
 	 -qt-xcb
-         -no-linuxfb
+     -no-linuxfb
 	 -fontconfig
 	 -system-freetype
 	 -system-zlib
@@ -73,7 +73,7 @@ elseif(BUILD_OS_LINUX)
 	 -L "${CMAKE_INSTALL_PREFIX}/lib")
 endif()
 
-if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "arm.*")
+if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
     list(APPEND qt_options -platform linux-g++-armv8)
 endif()
 

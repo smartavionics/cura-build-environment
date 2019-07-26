@@ -4,7 +4,7 @@ if(BUILD_OS_LINUX)
 
     set(_appimagetool_release 12)
 
-    if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
+    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
         set(_appimage_arch armhf)
     else()
         set(_appimage_arch x86_64)

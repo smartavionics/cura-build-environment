@@ -11,7 +11,7 @@ if(BUILD_OS_OSX)
         BUILD_IN_SOURCE 1
     )
 elseif(BUILD_OS_LINUX)
-    if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
+    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
         set(_openssl_os linux-armv4)
     else()
         set(_openssl_os linux-x86_64 enable-ec_nistp_64_gcc_128)
