@@ -1,9 +1,9 @@
 if(BUILD_OS_OSX OR BUILD_OS_LINUX)
 
-    if(${CMAKE_SYSTEM_PROCESSOR} MATCHES "armv7l")
-        set(_zlib_configure_opts)
-    else()
+    if(${CMAKE_SIZEOF_VOID_P} MATCHES "8")
         set(_zlib_configure_opts --64)
+    else()
+        set(_zlib_configure_opts)
     endif()
 
     ExternalProject_Add(zlib
