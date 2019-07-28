@@ -28,6 +28,8 @@ set(qt_options
     -no-sql-sqlite
     -no-sql-sqlite2
     -no-sql-tds
+    -no-icu
+    -no-egl
     -skip qtconnectivity
     -skip qtdoc
     -skip qtlocation
