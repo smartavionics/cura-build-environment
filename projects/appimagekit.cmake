@@ -10,7 +10,7 @@ if(BUILD_OS_LINUX)
         set(_appimage_arch x86_64)
     endif()
 
-    add_custom_target(AppImageKit ALL
+    add_custom_target(AppImageKit
         COMMENT "Installing AppImageKit tools to ${CMAKE_INSTALL_PREFIX}/bin/"
         COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_INSTALL_PREFIX}/bin/
 	COMMAND curl -o "${_appimagetool_path}" -SL https://github.com/AppImage/AppImageKit/releases/download/${_appimagetool_release}/appimagetool-${_appimage_arch}.AppImage
