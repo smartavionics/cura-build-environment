@@ -35,8 +35,8 @@ if(BUILD_OS_WINDOWS)
 endif()
 
 ExternalProject_Add(Python
-    URL https://www.python.org/ftp/python/3.5.2/Python-3.5.2.tgz
-    URL_MD5 3fe8434643a78630c61c6464fe2e7e72
+    URL https://www.python.org/ftp/python/3.5.7/Python-3.5.7.tgz
+    URL_MD5 92f4c16c55429bf986f5ab45fe3a6659
     PATCH_COMMAND ${python_patch_command}
     CONFIGURE_COMMAND "${python_configure_command}"
     BUILD_COMMAND ${python_build_command}
@@ -60,7 +60,7 @@ ExternalProject_Add_Step(Python ensurepip
 )
 
 ExternalProject_Add_Step(Python upgrade_packages
-    COMMAND ${Python3_EXECUTABLE} -m pip install pip==19.2.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install pip==19.2.2
     COMMAND ${Python3_EXECUTABLE} -m pip install setuptools==41.0.1
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest==4.4.1
     COMMAND ${Python3_EXECUTABLE} -m pip install pytest-benchmark==3.2.2
