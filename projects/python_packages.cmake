@@ -63,24 +63,26 @@ endif()
 # Other Python Packages
 add_custom_target(PythonPackages ALL
     COMMAND ${Python3_EXECUTABLE} -m pip install appdirs==1.4.3
-    COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.3.9
+    COMMAND ${Python3_EXECUTABLE} -m pip install certifi==2019.6.16
     COMMAND ${Python3_EXECUTABLE} -m pip install chardet==3.0.4
     COMMAND ${Python3_EXECUTABLE} -m pip install decorator==4.4.0
     COMMAND ${Python3_EXECUTABLE} -m pip install idna==2.8
     COMMAND ${Python3_EXECUTABLE} -m pip install netifaces==0.10.9
     COMMAND ${Python3_EXECUTABLE} -m pip install networkx==2.3
     COMMAND ${Python3_EXECUTABLE} -m pip install numpy-stl==2.10.1
-    COMMAND ${Python3_EXECUTABLE} -m pip install packaging==18.0
+    COMMAND ${Python3_EXECUTABLE} -m pip install packaging==19.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install pycollada==0.6
     COMMAND ${Python3_EXECUTABLE} -m pip install pycparser==2.19
-    COMMAND ${Python3_EXECUTABLE} -m pip install pyparsing==2.4.0
+    COMMAND ${Python3_EXECUTABLE} -m pip install pyparsing==2.4.2
     COMMAND ${Python3_EXECUTABLE} -m pip install pyserial==3.4
+    COMMAND ${Python3_EXECUTABLE} -m pip install python-dateutil==2.8.0
     COMMAND ${Python3_EXECUTABLE} -m pip install python-utils==2.3.0
     COMMAND ${Python3_EXECUTABLE} -m pip install requests==2.22.0
     COMMAND ${Python3_EXECUTABLE} -m pip install six==1.12.0
-    COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==2.38.18
-    COMMAND ${Python3_EXECUTABLE} -m pip install typing==3.6.6
-    COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.2
-    COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1
+    COMMAND ${Python3_EXECUTABLE} -m pip install trimesh==3.2.12
+    COMMAND ${Python3_EXECUTABLE} -m pip install typing==3.7.4
+    COMMAND ${Python3_EXECUTABLE} -m pip install urllib3==1.25.3
+    COMMAND ${Python3_EXECUTABLE} -m pip install PyYAML==5.1.2
     COMMAND ${Python3_EXECUTABLE} -m pip install zeroconf==0.17.6
     COMMENT "Install Python packages"
     DEPENDS NumpyScipyShapely
