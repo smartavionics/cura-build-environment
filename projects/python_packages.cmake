@@ -33,7 +33,7 @@ if(NOT BUILD_OS_WINDOWS)
 
     # Shapely
     add_custom_target(Shapely ALL
-        COMMAND ${Python3_EXECUTABLE} -m pip install "shapely[vectorized]==1.6.4.post2"
+        COMMAND LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib ${Python3_EXECUTABLE} -m pip install "shapely[vectorized]==1.6.4.post2"
         DEPENDS Scipy
     )
 

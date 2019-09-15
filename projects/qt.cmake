@@ -1,5 +1,5 @@
-set(qt_url https://download.qt.io/archive/qt/5.10/5.10.1/single/qt-everywhere-src-5.10.1.tar.xz)
-set(qt_md5 7e167b9617e7bd64012daaacb85477af)
+set(qt_url https://download.qt.io/archive/qt/5.13/5.13.0/single/qt-everywhere-src-5.13.0.tar.xz)
+set(qt_md5 3c168d9a3a08248ff36f4f54c82e437f)
 
 if(BUILD_OS_WINDOWS)
     # For some as of yet unknown reason, building Qt on Windows fails because it does not create moc targets.
@@ -28,6 +28,8 @@ set(qt_options
     -no-sql-sqlite
     -no-sql-sqlite2
     -no-sql-tds
+    -no-icu
+    -no-egl
     -skip qtconnectivity
     -skip qtdoc
     -skip qtlocation
@@ -43,6 +45,7 @@ set(qt_options
     -skip qt3d
     -skip qtcanvas3d
     -skip qtserialport
+    -skip qtserialbus
     -skip qtwayland
     -skip qtgamepad
     -skip qtscxml
@@ -58,16 +61,22 @@ elseif(BUILD_OS_WINDOWS)
     list(APPEND qt_options -opengl desktop)
 elseif(BUILD_OS_LINUX)
     list(APPEND qt_options
+     -use-gold-linker
 	 -rpath
 	 -pkg-config
 	 -opengl desktop -no-gtk
 	 -qt-xcb
+     -no-linuxfb
 	 -fontconfig
 	 -system-freetype
 	 -system-zlib
 	 -ssl -openssl-runtime
 	 -I "${CMAKE_INSTALL_PREFIX}/include"
 	 -L "${CMAKE_INSTALL_PREFIX}/lib")
+endif()
+
+if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
+    list(APPEND qt_options -platform linux-g++-armv8)
 endif()
 
 if(BUILD_OS_OSX)
@@ -82,7 +91,8 @@ else()
     ExternalProject_Add(Qt
         URL ${qt_url}
         URL_MD5 ${qt_md5}
-        CONFIGURE_COMMAND ./configure ${qt_options}
+        CONFIGURE_COMMAND cp -uav ${CMAKE_SOURCE_DIR}/projects/linux-g++-armv8 qtbase/mkspecs
+        COMMAND ./configure ${qt_options}
         BUILD_IN_SOURCE 1
     )
 endif()
