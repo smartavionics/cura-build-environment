@@ -49,10 +49,10 @@ if(BUILD_OS_LINUX)
     execute_process(
         COMMAND mkdir -p "${CMAKE_INSTALL_PREFIX}/lib"
     )
-    execute_process(
-        COMMAND ln -s "lib" "lib64"
-        WORKING_DIRECTORY "${CMAKE_INSTALL_PREFIX}"
-    )
+#    execute_process(
+#        COMMAND ln -s "lib" "lib64"
+#        WORKING_DIRECTORY "${CMAKE_INSTALL_PREFIX}"
+#    )
 endif()
 
 file(GLOB _projects projects/*.cmake)
