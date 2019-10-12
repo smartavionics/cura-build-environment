@@ -5,7 +5,7 @@ endif()
 
 set(_url "https://github.com/anthony-tuininga/cx_Freeze/archive/5.0.tar.gz")
 if(BUILD_OS_WINDOWS)
-    set(_url https://github.com/anthony-tuininga/cx_Freeze/archive/5.0.1.tar.gz)
+    set(_url https://github.com/anthony-tuininga/cx_Freeze/archive/5.1.1.tar.gz)
 endif()
 
 ExternalProject_Add(cx_Freeze
