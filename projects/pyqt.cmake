@@ -1,11 +1,11 @@
 set(pyqt_command "")
 if(BUILD_OS_WINDOWS)
     add_custom_target(PyQt
-        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.10
+        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.13
         COMMENT "Installing PyQt5"
     )
 
-    SetProjectDependencies(TARGET PyQt DEPENDS Python)
+    SetProjectDependencies(TARGET PyQt DEPENDS Python PyQtSip)
 else()
     if(BUILD_OS_OSX)
         set(pyqt_command
