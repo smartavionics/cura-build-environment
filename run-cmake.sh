@@ -1,6 +1,6 @@
 #! /bin/sh
 
-if [[ $(uname) == "Darwin" ]]; then
+if test "$(uname)" = "Darwin"; then
   export CURA_TARGET_OSX_VERSION=10.13
   . ../env_osx.sh
   if [[ -e /Library/Developer/CommandLineTools/usr/bin/clang ]]; then
