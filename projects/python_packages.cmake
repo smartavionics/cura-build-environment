@@ -1,5 +1,10 @@
 add_custom_target(NumpyScipyShapely ALL DEPENDS Python)
 
+if(BUILD_OS_LINUX)
+    # make sure we can find installed dependencies and include files
+    set(Python3_EXECUTABLE env PKG_CONFIG_PATH="${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" CPATH="${CMAKE_INSTALL_PREFIX}/include" ${Python3_EXECUTABLE})
+endif()
+
 # Numpy, Scipy, Shapely
 if(NOT BUILD_OS_WINDOWS)
     # On Mac, building with gfortran can be a problem. If we install scipy via pip, it will compile Fortran code
