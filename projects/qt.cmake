@@ -1,7 +1,7 @@
 
 if(BUILD_OS_LINUX)
-set(qt_url https://download.qt.io/archive/qt/5.13/5.13.0/single/qt-everywhere-src-5.13.0.tar.xz)
-set(qt_md5 3c168d9a3a08248ff36f4f54c82e437f)
+set(qt_url https://download.qt.io/archive/qt/5.13/5.13.2/single/qt-everywhere-src-5.13.2.tar.xz)
+set(qt_md5 7c04c678d4ecd9e9c06747e7c17e0bb9)
 endif()
 
 if(BUILD_OS_OSX)
