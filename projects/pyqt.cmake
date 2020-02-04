@@ -28,6 +28,10 @@ else()
             --confirm-license
         )
     else()
+        set(disable "")
+        if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
+            list(APPEND disable --disable PyQt_Desktop_OpenGL)
+        endif()
         set(pyqt_command
             # On Linux, PyQt configure fails because it creates an executable that does not respect RPATH
             "LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib"
@@ -36,6 +40,7 @@ else()
             --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
             --sip ${CMAKE_INSTALL_PREFIX}/bin/sip
             --confirm-license
+            ${disable}
         )
     endif()
     # Since PyQt5 5.11, PyQt5 requires its standalone sip module which needs to be built with the option
