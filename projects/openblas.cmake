@@ -1,7 +1,11 @@
 if(NOT BUILD_OS_WINDOWS)
     # Fortran compiler is needed for OpenBLAS, but it does no check whether it is available.
     enable_language(Fortran)
-    set(openblas_options DYNAMIC_ARCH=1 NO_STATIC=1 TARGET=HASWELL)
+    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
+        set(openblas_options DYNAMIC_ARCH=1 NO_STATIC=1)
+    else()
+        set(openblas_options DYNAMIC_ARCH=1 NO_STATIC=1 TARGET=HASWELL)
+    endif()
 
     ExternalProject_Add(OpenBLAS
         URL https://github.com/xianyi/OpenBLAS/archive/v0.3.7.tar.gz
