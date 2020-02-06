@@ -54,7 +54,7 @@ else()
     SetProjectDependencies(TARGET PyQtSip DEPENDS Python)
 
     ExternalProject_Add(PyQt
-        URL https://www.riverbankcomputing.com/static/Downloads/PyQt5/5.13.2/PyQt5-5.13.2.tar.gz
+        URL https://www.riverbankcomputing.com/static/Downloads/PyQt5/PyQt5-5.14.2.dev2002051759.tar.gz
         #URL_MD5 e9bd7ade2d04a4da144570a8b654e054
         CONFIGURE_COMMAND ${pyqt_command}
         BUILD_IN_SOURCE 1
