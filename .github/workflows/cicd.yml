@@ -3,18 +3,46 @@ name: CI/CD for master
 on:
   push:
     branches:
-      - master
+    - master
+    - WIP
+    pathes:
+    - 'cmake/**'
+    - 'docker/**'
+    - 'projects/**'
+    - 'CMakeLists.txt'
+    - 'xstartup'
 jobs:
-  build:
+  build-linux:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout master
       uses: actions/checkout@master
-    - name: Build and publish docker image
-      uses: HurricanKai/Publish-Docker-Github-Action@1.12.1
       with:
-        name: ultimaker/cura-build-environment
-        dockerfile: docker/linux/Dockerfile.centos
-        snapshot: true
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+        fetch-depth: 1
+
+    - name: Build Linux docker image
+      env:
+        DOCKER_IMAGE_NAME: ultimaker/cura-build-environment
+        DOCKER_IMAGE_LATEST_TAG: centos-latest
+        GIT_REF: ${{ github.ref }}
+        DOCKER_IO: docker.io
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: .github/workflows/build.sh
+
+  build-windows:
+    runs-on: self-hosted
+    steps:
+    - name: Checkout master
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 1
+    - name: Build Windows docker image
+      env:
+        DOCKER_IMAGE_NAME: ultimaker/cura-build-environment
+        DOCKER_IMAGE_LATEST_TAG: win1809-latest
+        GIT_REF: ${{ github.ref }}
+        DOCKER_IO: docker.io
+        DOCKER_USER: ${{ secrets.DOCKERHUB_USERNAME }}
+        DOCKER_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      run: .github/workflows/build.ps1
