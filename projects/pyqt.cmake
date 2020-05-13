@@ -5,7 +5,7 @@ if(BUILD_OS_WINDOWS)
     ExternalProject_Add(PyQtSip
         URL https://www.riverbankcomputing.com/static/Downloads/sip/4.19.19/sip-4.19.19.tar.gz
         #URL_MD5 236578d2199da630ae1251671b9a7bfe
-        CONFIGURE_COMMAND ${sip_command} --sip-module PyQt5.sip
+        CONFIGURE_COMMAND ${Python3_EXECUTABLE} configure.py --platform win32-msvc2015 --sip-module PyQt5.sip
         BUILD_IN_SOURCE 1
     )
 
