@@ -37,7 +37,6 @@ set(qt_options
     -no-sql-sqlite2
     -no-sql-tds
     -no-icu
-    -no-egl
     -skip qtconnectivity
     -skip qtdoc
     -skip qtlocation
@@ -60,19 +59,19 @@ set(qt_options
 )
 
 if(BUILD_OS_OSX)
-    list(APPEND qt_options -no-framework)
+    list(APPEND qt_options -no-framework -no-egl)
     if(CURA_OSX_SDK_VERSION)
         list(APPEND qt_options -sdk macosx${CURA_OSX_SDK_VERSION})
     endif()
     set(_qt_config_cmd ${CMAKE_SOURCE_DIR}/projects/qt-patch-macosx-target.sh && ${_qt_configure_cmd})
 elseif(BUILD_OS_WINDOWS)
-    list(APPEND qt_options -opengl desktop)
+    list(APPEND qt_options -opengl desktop -no-egl)
 elseif(BUILD_OS_LINUX)
     list(APPEND qt_options
      -use-gold-linker
 	 -rpath
 	 -pkg-config
-	 -opengl desktop -no-gtk
+	 -no-gtk
 	 -qt-xcb
      -no-linuxfb
 	 -fontconfig
@@ -81,10 +80,11 @@ elseif(BUILD_OS_LINUX)
 	 -ssl -openssl-runtime
 	 -I "${CMAKE_INSTALL_PREFIX}/include"
 	 -L "${CMAKE_INSTALL_PREFIX}/lib")
-endif()
-
-if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
-    list(APPEND qt_options -platform linux-g++-armv8)
+    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "(arm-linux-gnueabihf|aarch64-linux-gnu)")
+        list(APPEND qt_options -opengl es2 -platform linux-g++-armv8)
+    else()
+        list(APPEND qt_options -opengl desktop -no-egl)
+    endif()
 endif()
 
 if(BUILD_OS_OSX)

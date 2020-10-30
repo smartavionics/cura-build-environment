@@ -28,6 +28,10 @@ else()
             --confirm-license
         )
     else()
+        set(disable "")
+        if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "(arm-linux-gnueabihf|aarch64-linux-gnu)")
+            list(APPEND disable --disable PyQt_Desktop_OpenGL)
+        endif()
         set(pyqt_command
             # On Linux, PyQt configure fails because it creates an executable that does not respect RPATH
             "LD_LIBRARY_PATH=${CMAKE_INSTALL_PREFIX}/lib"
@@ -36,6 +40,7 @@ else()
             --qmake ${CMAKE_INSTALL_PREFIX}/bin/qmake
             --sip ${CMAKE_INSTALL_PREFIX}/bin/sip
             --confirm-license
+            ${disable}
         )
     endif()
     # Since PyQt5 5.11, PyQt5 requires its standalone sip module which needs to be built with the option
@@ -49,7 +54,8 @@ else()
     SetProjectDependencies(TARGET PyQtSip DEPENDS Python)
 
     ExternalProject_Add(PyQt
-        URL https://www.riverbankcomputing.com/static/Downloads/PyQt5/5.13.2/PyQt5-5.13.2.tar.gz
+        #URL https://www.riverbankcomputing.com/static/Downloads/PyQt5/PyQt5-5.14.2.dev2002051759.tar.gz
+        URL https://files.pythonhosted.org/packages/4d/81/b9a66a28fb9a7bbeb60e266f06ebc4703e7e42b99e3609bf1b58ddd232b9/PyQt5-5.14.2.tar.gz
         #URL_MD5 e9bd7ade2d04a4da144570a8b654e054
         CONFIGURE_COMMAND ${pyqt_command}
         BUILD_IN_SOURCE 1
