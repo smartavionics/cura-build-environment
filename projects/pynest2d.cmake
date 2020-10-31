@@ -24,9 +24,9 @@ elseif(BUILD_OS_OSX)
 endif()
 
 ExternalProject_Add(pynest2d
-    GIT_REPOSITORY https://github.com/Ultimaker/pynest2d.git
-    GIT_TAG origin/master
-    GIT_SHALLOW 1
+    GIT_REPOSITORY https://github.com/smartavionics/pynest2d.git
+    GIT_TAG origin/sip5
+    #GIT_SHALLOW 1
     CMAKE_COMMAND ${pylib_cmake_command}
     CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
                -DCMAKE_INSTALL_PREFIX=${CMAKE_INSTALL_PREFIX}
