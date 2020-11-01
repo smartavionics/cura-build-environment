@@ -13,6 +13,8 @@ if(BUILD_OS_OSX)
 elseif(BUILD_OS_LINUX)
     if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
         set(_openssl_os linux-armv4)
+    elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
+        set(_openssl_os linux-aarch64)
     else()
         set(_openssl_os linux-x86_64 enable-ec_nistp_64_gcc_128)
     endif()
@@ -23,7 +25,7 @@ elseif(BUILD_OS_LINUX)
         URL_HASH SHA256=50a98e07b1a89eb8f6a99477f262df71c6fa7bef77df4dc83025a2845c827d00
         CONFIGURE_COMMAND perl Configure --prefix=${CMAKE_INSTALL_PREFIX} --openssldir=${CMAKE_INSTALL_PREFIX} ${_openssl_args} ${_openssl_os}
         BUILD_COMMAND make depend && make
-        INSTALL_COMMAND make install
+        INSTALL_COMMAND make install_sw
         BUILD_IN_SOURCE 1
     )
 endif()

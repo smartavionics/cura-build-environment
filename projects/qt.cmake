@@ -80,8 +80,10 @@ elseif(BUILD_OS_LINUX)
 	 -ssl -openssl-runtime
 	 -I "${CMAKE_INSTALL_PREFIX}/include"
 	 -L "${CMAKE_INSTALL_PREFIX}/lib")
-    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "(arm-linux-gnueabihf|aarch64-linux-gnu)")
-        list(APPEND qt_options -opengl es2 -platform linux-g++-armv8)
+    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
+        list(APPEND qt_options -opengl es2 -platform linux-g++-armv8-armhf)
+    elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
+        list(APPEND qt_options -opengl es2 -platform linux-g++-armv8-aarch64)
     else()
         list(APPEND qt_options -opengl desktop -no-egl)
     endif()
@@ -96,10 +98,16 @@ if(BUILD_OS_OSX)
         DEPENDS OpenSSL
     )
 else()
+    set(configure_cmd)
+    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
+        set(configure_cmd CONFIGURE_COMMAND cp -uav ${CMAKE_SOURCE_DIR}/projects/linux-g++-armv8-armhf qtbase/mkspecs)
+    elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
+        set(configure_cmd CONFIGURE_COMMAND cp -uav ${CMAKE_SOURCE_DIR}/projects/linux-g++-armv8-aarch64 qtbase/mkspecs)
+    endif()
     ExternalProject_Add(Qt
         URL ${qt_url}
         URL_MD5 ${qt_md5}
-        CONFIGURE_COMMAND cp -uav ${CMAKE_SOURCE_DIR}/projects/linux-g++-armv8 qtbase/mkspecs
+        ${configure_cmd}
         COMMAND ./configure ${qt_options}
         BUILD_IN_SOURCE 1
     )

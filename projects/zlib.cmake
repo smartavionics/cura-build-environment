@@ -1,6 +1,8 @@
 if(BUILD_OS_OSX OR BUILD_OS_LINUX)
 
-    if(${CMAKE_SIZEOF_VOID_P} MATCHES "8")
+    if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
+        set(_zlib_configure_opts)
+    elseif(${CMAKE_SIZEOF_VOID_P} MATCHES "8")
         set(_zlib_configure_opts --64)
     else()
         set(_zlib_configure_opts)

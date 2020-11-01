@@ -6,6 +6,8 @@ if(BUILD_OS_LINUX)
 
     if(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "arm-linux-gnueabihf")
         set(_appimage_arch armhf)
+    elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
+        set(_appimage_arch aarch64)
     else()
         set(_appimage_arch x86_64)
     endif()
