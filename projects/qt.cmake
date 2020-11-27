@@ -103,6 +103,8 @@ else()
         set(configure_cmd CONFIGURE_COMMAND cp -uav ${CMAKE_SOURCE_DIR}/projects/linux-g++-armv8-armhf qtbase/mkspecs)
     elseif(${CMAKE_CXX_LIBRARY_ARCHITECTURE} MATCHES "aarch64-linux-gnu")
         set(configure_cmd CONFIGURE_COMMAND cp -uav ${CMAKE_SOURCE_DIR}/projects/linux-g++-armv8-aarch64 qtbase/mkspecs)
+    else()
+        set(configure_cmd CONFIGURE_COMMAND)
     endif()
     ExternalProject_Add(Qt
         URL ${qt_url}
