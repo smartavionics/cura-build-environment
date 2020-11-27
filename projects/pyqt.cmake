@@ -18,7 +18,7 @@ if(BUILD_OS_WINDOWS)
     SetProjectDependencies(TARGET PyQt5-Sip DEPENDS Python)
 
     add_custom_target(PyQt
-        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.13
+        COMMAND ${Python3_EXECUTABLE} -m pip install PyQt5==5.15.1
         COMMENT "Installing PyQt5"
     )
 
