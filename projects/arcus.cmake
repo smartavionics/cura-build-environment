@@ -31,7 +31,7 @@ SetProjectDependencies(TARGET Arcus DEPENDS Sip Protobuf)
 
 if(BUILD_OS_WINDOWS)
     ExternalProject_Add(Arcus-MinGW
-        GIT_REPOSITORY https://github.com/ultimaker/libArcus.git
+        GIT_REPOSITORY https://github.com/smartavionics/libArcus.git
         GIT_TAG origin/${CURA_ARCUS_BRANCH_OR_TAG}
         GIT_SHALLOW 1
         CMAKE_GENERATOR "MinGW Makefiles"

@@ -22,7 +22,7 @@ if(BUILD_OS_WINDOWS)
         COMMENT "Installing PyQt5"
     )
 
-    SetProjectDependencies(TARGET PyQt DEPENDS Python PyQtSip)
+    SetProjectDependencies(TARGET PyQt DEPENDS Python PyQt5-Sip)
 else()
     if(BUILD_OS_OSX)
         set(pyqt_command
