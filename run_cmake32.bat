@@ -13,4 +13,4 @@ REM cryptography by default links to OpenSSL 1.1.0 which has different library
 REM file names, so we need this flag to be able to link to OpenSSL 1.0.2
 set CRYPTOGRAPHY_WINDOWS_LINK_LEGACY_OPENSSL=1
 
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=%INSTALL_DIR% -DCMAKE_INSTALL_PREFIX=%INSTALL_DIR% -DBUILD_OS_WIN32=ON -G "NMake Makefiles" -DCURA_VERSION=mb-master ..
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH=%INSTALL_DIR% -DCMAKE_INSTALL_PREFIX=%INSTALL_DIR% -DBUILD_OS_WIN32=ON -G "NMake Makefiles" -DCURA_VERSION=mb-master -DCURA_SAVITAR_BRANCH_OR_TAG=sip5 -DCURA_ARCUS_BRANCH_OR_TAG=sip5 ..
